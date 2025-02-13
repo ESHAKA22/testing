@@ -1,64 +1,8 @@
-body {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #222;
-    overflow: hidden;
+div{
+    text-align: center;
+    vertical-align: middle;
+    position: relative;
 }
-
-.container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    animation: scroll-text 20s linear infinite;
-}
-
-.text-line {
-    font-family: 'Arial', sans-serif;
-    font-size: 24px;
-    color: white;
-    margin: 10px 0;
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.paragraph {
-    color: white;
-    margin: 10px 0;
-    line-height: 1.5;
-    font-size: 1.2em;
-    animation: colorChange 5s infinite alternate;
-}
-
-/* Animation for scrolling text */
-@keyframes scroll-text {
-    0% {
-        transform: translateY(100%);
-    }
-    100% {
-        transform: translateY(-100%);
-    }
-}
-
-/* Color animation for each paragraph */
-@keyframes colorChange {
-    0% {
-        color: red;
-    }
-    25% {
-        color: green;
-    }
-    50% {
-        color: blue;
-    }
-    75% {
-        color: orange;
-    }
-    100% {
-        color: purple;
-    }
+#no{
+    position: absolute;
 }
