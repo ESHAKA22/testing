@@ -80,7 +80,7 @@ button {
     bottom: -20px; /* Start from bottom */
     font-size: 20px;
     color: rgba(255, 105, 180, 0.8); /* Light pink hearts */
-    animation: floatUp 5s infinite ease-in;
+    animation: floatUp 3s infinite ease-in;
 }
 
 /* Floating effect */
