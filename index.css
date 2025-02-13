@@ -6,7 +6,7 @@ body {
     align-items: center;
     text-align: center;
     font-family: 'Arial', sans-serif;
-    color: white;
+    color: rgb(184, 55, 55);
     animation: bgAnimation 5s infinite alternate;
 }
 
