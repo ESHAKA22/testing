@@ -24,16 +24,28 @@
             var index = 0;
 
             function change(){
-                var maxX = window.innerWidth - 100; // Keep button within viewport
-            var maxY = window.innerHeight - 50;
+                var moveRangeX = 150; // Maximum move distance horizontally
+            var moveRangeY = 100; // Maximum move distance vertically
 
-            var i = Math.floor(Math.random() * maxX);
-            var j = Math.floor(Math.random() * maxY);
-                no.style.left =i +"px";
-                no.style.top = j + "px";
+            // Get current position
+            var rect = no.getBoundingClientRect();
+            var currentX = rect.left + window.scrollX;
+            var currentY = rect.top + window.scrollY;
 
-                index = (index + 1) % texts.length;
-                no.innerText = texts[index];
+            // Calculate new position within limited range
+            var newX = currentX + (Math.random() * moveRangeX - moveRangeX / 2);
+            var newY = currentY + (Math.random() * moveRangeY - moveRangeY / 2);
+
+            // Apply new position
+            no.style.left = newX + "px";
+            no.style.top = newY + "px";
+
+            // Cycle text
+            index = (index + 1) % texts.length;
+            no.innerText = texts[index];
+
+            // Ensure button stays visible
+            no.style.display = "inline-block";
              
             }
 
