@@ -29,6 +29,10 @@ div {
     text-align: center;
     vertical-align: middle;
     position: relative;
+    align-items: center;
+    display: flex;
+    flex-direction: column; /* Align items vertically */
+    justify-content: center;
 }
 
 h1 {
@@ -60,9 +64,7 @@ button {
 #yesButton {
     background: #ff3399;
     color: white;
-    position: fixed;
-    left: 50%;
-    top: 40%; 
+    margin-right: 10px; 
     box-shadow: 0 5px 15px rgba(255, 51, 153, 0.4);
 }
 
@@ -74,12 +76,14 @@ button {
 #no {
     background: #cc66ff;
     color: white;
-    position: fixed;
-    left: 50%;
-    top: 50%;
+    
     transform: translate(-50% , -50%);
     transition: all 0.3s ease-in-out;
     
+}
+div button {
+    display: inline-block; /* Align buttons inline */
+    width: auto;
 }
 /* HEART ANIMATION */
 .heart {
