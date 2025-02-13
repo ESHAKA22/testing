@@ -23,31 +23,20 @@
             var texts = ["NO", "DON'T", "PLEASE", "ARE YOU SURE?", "REALLY???"];
             var index = 0;
 
-            function change(){
-                var moveRangeX = 150; // Maximum move distance horizontally
-            var moveRangeY = 100; // Maximum move distance vertically
+            function change() {
+    var moveRangeX = window.innerWidth * 0.3; // Move within 30% of the screen width
+    var moveRangeY = window.innerHeight * 0.3; // Move within 30% of the screen height
 
-            // Get current position
-            var rect = no.getBoundingClientRect();
-            var currentX = rect.left + window.scrollX;
-            var currentY = rect.top + window.scrollY;
+    var newX = Math.random() * moveRangeX + (window.innerWidth / 2 - moveRangeX / 2);
+    var newY = Math.random() * moveRangeY + (window.innerHeight / 2 - moveRangeY / 2);
 
-            // Calculate new position within limited range
-            var newX = currentX + (Math.random() * moveRangeX - moveRangeX / 2);
-            var newY = currentY + (Math.random() * moveRangeY - moveRangeY / 2);
+    no.style.left = newX + "px";
+    no.style.top = newY + "px";
 
-            // Apply new position
-            no.style.left = newX + "px";
-            no.style.top = newY + "px";
-
-            // Cycle text
-            index = (index + 1) % texts.length;
-            no.innerText = texts[index];
-
-            // Ensure button stays visible
-            no.style.display = "inline-block";
-             
-            }
+    // Cycle text
+    index = (index + 1) % texts.length;
+    no.innerText = texts[index];
+}
 
             function createHeart() {
         const heart = document.createElement("div");
