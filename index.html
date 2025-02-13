@@ -30,6 +30,10 @@
     var newX = Math.random() * moveRangeX + (window.innerWidth / 2 - moveRangeX / 2);
     var newY = Math.random() * moveRangeY + (window.innerHeight / 2 - moveRangeY / 2);
 
+    var bottomLimit = window.innerHeight - no.offsetHeight - 20; // Adjust 20px as padding
+
+    newY = Math.min(newY, bottomLimit);
+
     no.style.left = newX + "px";
     no.style.top = newY + "px";
 
