@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 body {
     background: linear-gradient(45deg, #ffb6c1, #e6a8d7, #f0d9ff);
     height: 100vh;
@@ -5,7 +6,7 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Pacifico', cursive;
     color: rgb(184, 55, 55);
     animation: bgAnimation 5s infinite alternate;
     overflow: hidden;
