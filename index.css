@@ -60,6 +60,9 @@ button {
 #yesButton {
     background: #ff3399;
     color: white;
+    position: fixed;
+    left: 50%;
+    top: 40%; 
     box-shadow: 0 5px 15px rgba(255, 51, 153, 0.4);
 }
 
