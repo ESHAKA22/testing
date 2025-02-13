@@ -2,20 +2,113 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" type="text/css" href="second.css">
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Drag Letter into Envelope</title>
-    
+    <title>Beautiful Animated Envelope</title>
+    <style>
+        :root {
+            --color-envelope: #d291bc;
+            --color-flap: #e8a2d4;
+            --color-letter: #fff;
+            --color-text: #6a0572;
+            --color-message: #fddde6;
+        }
+
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #f8c8dc, #b784b7);
+            overflow: hidden;
+        }
+
+        .container {
+            position: relative;
+            width: 300px;
+            height: 250px;
+            cursor: pointer;
+        }
+
+        .envelope {
+            position: relative;
+            width: 288px;
+            height: 180px;
+            background-color: var(--color-envelope);
+            border-bottom-left-radius: 6px;
+            border-bottom-right-radius: 6px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, .1);
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+        }
+
+        .flap {
+            position: absolute;
+            top: -50%;
+            width: 100%;
+            height: 100%;
+            background-color: var(--color-flap);
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            transform-origin: top;
+            transition: transform 0.5s;
+        }
+
+        .letter {
+            position: absolute;
+            bottom: 10px;
+            width: 90%;
+            height: 50%;
+            background-color: var(--color-letter);
+            border: 2px solid var(--color-text);
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Arial', sans-serif;
+            font-weight: bold;
+            color: var(--color-text);
+            opacity: 0;
+            transform: translateY(50px);
+            transition: transform 0.5s ease-in-out, opacity 0.5s;
+        }
+
+        .message {
+            position: relative;
+            top: 20px;
+            width: 80%;
+            padding: 10px;
+            background-color: var(--color-message);
+            border-radius: 10px;
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+            color: var(--color-text);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .flower {
+            position: absolute;
+            font-size: 24px;
+            animation: floatUp 5s linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
+        }
+    </style>
 </head>
 <body>
-
     <div class="container" id="envelopeContainer">
         <div class="envelope" id="envelope">
             <div class="flap" id="flap"></div>
         </div>
-        <div class="letter" id="letter">💌</div>
-        <div class="message" id="message">Your Secret Message</div>
+        <div class="letter" id="letter">TO MY LOVE 💌</div>
+        <div class="message" id="message">No matter how much I say I LOVE YOU, I will always love you more than that. 💜</div>
     </div>
 
     <script>
@@ -23,9 +116,6 @@
         const flap = document.getElementById('flap');
         const letter = document.getElementById('letter');
         const message = document.getElementById('message');
-
-        let isDragging = false;
-        let offsetX, offsetY;
 
         envelopeContainer.addEventListener('click', () => {
             flap.style.transform = 'rotateX(180deg)';
@@ -36,26 +126,18 @@
             }, 500);
         });
 
-        message.addEventListener('mousedown', (e) => {
-            isDragging = true;
-            offsetX = e.clientX - message.getBoundingClientRect().left;
-            offsetY = e.clientY - message.getBoundingClientRect().top;
-            message.style.cursor = 'grabbing';
-        });
-
-        document.addEventListener('mousemove', (e) => {
-            if (isDragging) {
-                message.style.position = "absolute";
-                message.style.left = `${e.clientX - offsetX}px`;
-                message.style.top = `${e.clientY - offsetY}px`;
+        function createFloatingFlowers() {
+            for (let i = 0; i < 15; i++) {
+                let flower = document.createElement("div");
+                flower.classList.add("flower");
+                flower.innerHTML = "🌸";
+                flower.style.left = Math.random() * 100 + "vw";
+                flower.style.animationDuration = Math.random() * 3 + 2 + "s";
+                document.body.appendChild(flower);
+                setTimeout(() => flower.remove(), 5000);
             }
-        });
-
-        document.addEventListener('mouseup', () => {
-            isDragging = false;
-            message.style.cursor = 'grab';
-        });
+        }
+        setInterval(createFloatingFlowers, 1000);
     </script>
-
 </body>
 </html>
