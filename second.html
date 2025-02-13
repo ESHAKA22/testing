@@ -1,3 +1,104 @@
-<html>
-    <h1>HIIIII</h1>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag Letter into Envelope</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f9f1e7;
+        }
+
+        #container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+        }
+
+        #envelope {
+            position: absolute;
+            bottom: 0;
+            width: 300px;
+            height: 180px;
+            background: #c0392b;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        #flap {
+            position: absolute;
+            top: -90px;
+            width: 0;
+            height: 0;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-bottom: 90px solid #c0392b;
+        }
+
+        #letter {
+            position: absolute;
+            width: 260px;
+            height: 150px;
+            background: #fff;
+            top: 50px;
+            left: 20px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            font-family: Arial, sans-serif;
+            cursor: grab;
+            transition: all 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="envelope">
+            <div id="flap"></div>
+        </div>
+        <div id="letter" draggable="true">Drag me</div>
+    </div>
+    
+    <script>
+        const letter = document.getElementById("letter");
+        const envelope = document.getElementById("envelope");
+        
+        let isDragging = false;
+        let offsetX, offsetY;
+        
+        letter.addEventListener("dragstart", (e) => {
+            isDragging = true;
+            offsetX = e.clientX - letter.getBoundingClientRect().left;
+            offsetY = e.clientY - letter.getBoundingClientRect().top;
+        });
+        
+        document.addEventListener("dragover", (e) => {
+            e.preventDefault();
+        });
+        
+        document.addEventListener("drop", (e) => {
+            if (isDragging) {
+                let envelopeRect = envelope.getBoundingClientRect();
+                if (
+                    e.clientX > envelopeRect.left &&
+                    e.clientX < envelopeRect.right &&
+                    e.clientY > envelopeRect.top &&
+                    e.clientY < envelopeRect.bottom
+                ) {
+                    letter.style.top = "140px";
+                    letter.style.left = "50%";
+                    letter.style.transform = "translate(-50%, 50%) scale(0.8)";
+                    letter.style.opacity = "0";
+                }
+                isDragging = false;
+            }
+        });
+    </script>
+</body>
 </html>
