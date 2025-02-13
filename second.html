@@ -6,118 +6,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Drag Letter into Envelope</title>
-    <style>
-        body, html {
-            height: 100%;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #f0f0f0;
-        }
-
-        .container {
-            position: relative;
-            width: 300px;
-            height: 200px;
-        }
-
-        .envelope {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            height: 50%;
-            background-color: #fff;
-            border: 2px solid #000;
-            border-bottom-left-radius: 10px;
-            border-bottom-right-radius: 10px;
-            overflow: hidden;
-        }
-
-        .flap {
-            position: absolute;
-            top: -50%;
-            width: 100%;
-            height: 100%;
-            background-color: #fff;
-            border: 2px solid #000;
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-            transform-origin: bottom;
-            transition: transform 0.5s;
-        }
-
-        .letter {
-            position: absolute;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #ffebcd;
-            border: 2px solid #000;
-            border-radius: 5px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: grab;
-            user-select: none;
-        }
-    </style>
+    
 </head>
 <body>
 
-    <div class="container">
+    <div class="container" id="envelopeContainer">
         <div class="envelope" id="envelope">
             <div class="flap" id="flap"></div>
         </div>
-        <div class="letter" id="letter">Your Message Here</div>
+        <div class="letter" id="letter">💌</div>
+        <div class="message" id="message">Your Secret Message</div>
     </div>
 
     <script>
-        const letter = document.getElementById('letter');
-        const envelope = document.getElementById('envelope');
+        const envelopeContainer = document.getElementById('envelopeContainer');
         const flap = document.getElementById('flap');
+        const letter = document.getElementById('letter');
+        const message = document.getElementById('message');
 
         let isDragging = false;
         let offsetX, offsetY;
 
-        letter.addEventListener('mousedown', (e) => {
+        envelopeContainer.addEventListener('click', () => {
+            flap.style.transform = 'rotateX(180deg)';
+            setTimeout(() => {
+                letter.style.transform = 'translateY(-80px)';
+                letter.style.opacity = '1';
+                message.style.opacity = '1';
+            }, 500);
+        });
+
+        message.addEventListener('mousedown', (e) => {
             isDragging = true;
-            offsetX = e.clientX - letter.getBoundingClientRect().left;
-            offsetY = e.clientY - letter.getBoundingClientRect().top;
-            letter.style.cursor = 'grabbing';
+            offsetX = e.clientX - message.getBoundingClientRect().left;
+            offsetY = e.clientY - message.getBoundingClientRect().top;
+            message.style.cursor = 'grabbing';
         });
 
         document.addEventListener('mousemove', (e) => {
             if (isDragging) {
-                letter.style.position = "absolute";
-                letter.style.left = `${e.clientX - offsetX}px`;
-                letter.style.top = `${e.clientY - offsetY}px`;
+                message.style.position = "absolute";
+                message.style.left = `${e.clientX - offsetX}px`;
+                message.style.top = `${e.clientY - offsetY}px`;
             }
         });
 
-        document.addEventListener('mouseup', (e) => {
-            if (isDragging) {
-                isDragging = false;
-                letter.style.cursor = 'grab';
-
-                const letterRect = letter.getBoundingClientRect();
-                const envelopeRect = envelope.getBoundingClientRect();
-
-                if (
-                    letterRect.bottom > envelopeRect.top &&
-                    letterRect.top < envelopeRect.bottom &&
-                    letterRect.right > envelopeRect.left &&
-                    letterRect.left < envelopeRect.right
-                ) {
-                    // Letter is inside the envelope
-                    letter.style.display = 'none';
-                    flap.style.transform = 'rotateX(180deg)';
-                } else {
-                    // Reset letter position
-                    letter.style.left = '0';
-                    letter.style.top = '0';
-                }
-            }
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+            message.style.cursor = 'grab';
         });
     </script>
 
