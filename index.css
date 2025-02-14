@@ -76,14 +76,12 @@ button {
 #no {
     background: #cc66ff;
     color: white;
+    position: fixed;
     left: 50%;
     top: 50%;
     transform: translate(-50% , -50%);
     transition: all 0.5s ease-in-out;
     
-}
-.no-moving {
-    position: absolute;
 }
 /* HEART ANIMATION */
 .heart {
