@@ -14,11 +14,19 @@
         <script>
             document.getElementById("yesButton").addEventListener("click",showAlert);
             function showAlert(){
-                alert("I knew you couldn’t resist me!!!");
+                let alertBox = document.createElement("div");
+        alertBox.classList.add("lovely-alert");
+        alertBox.innerText = "💖 I knew you couldn’t resist me!!! 💖";
+        
+        document.body.appendChild(alertBox);
+
+        setTimeout(() => {
+            alertBox.remove();
 
                 window.location.href = "second.html";
 
-            }
+            },2000);
+        }
             var no = document.getElementById("no");
             var texts = ["NO", "DON'T", "PLEASE", "ARE YOU SURE?", "REALLY???"];
             var index = 0;
